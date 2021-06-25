@@ -1,13 +1,14 @@
 import io
+import numpy
 from PIL import Image
 from backend.ugatit.wrapper import UgatitWrapper
-import numpy
 
 
 class GanApi:
     """
     Class contains API methods for bot
     """
+
     def __init__(self) -> None:
         """
         Constructor

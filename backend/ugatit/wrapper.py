@@ -1,9 +1,8 @@
 import os.path
-import numpy
 import cv2
+import numpy
 import tensorflow
-from argparse import Namespace
-from backend.ugatit.repo.UGATIT import UGATIT
+from argparse import Namespacefrom backend.ugatit.repo.UGATIT import UGATIT
 import backend.ugatit.repo.main as ugatit_main
 import backend.ugatit.repo.utils as ugatit_utils
 
@@ -13,6 +12,7 @@ class UgatitWrapper:
     Wrapper for UGATIT class.
     Provides interface for numpy.ndarray selfie processing
     """
+
     def __init__(self) -> None:
         """
         Constructor

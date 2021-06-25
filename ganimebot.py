@@ -1,6 +1,6 @@
+import configparser
 import io
 import logging
-import configparser
 from aiogram import Bot, Dispatcher, types, executor
 from api.api_v1 import GanApi
 
@@ -9,6 +9,7 @@ class GanimeBot:
     """
     GANime bot class
     """
+
     def __init__(self, api_token: str) -> None:
         """
         Constructor
@@ -32,13 +33,19 @@ class GanimeBot:
         Prints help message to the chat
         :param message: message object
         """
-        await message.reply("Bot is under development. Send photo only")
+        self._logger.info(f"Handle help message from {message.chat.id}:{message.chat.username}")
+        await message.reply('\n'.join([
+            "Bot is under development.",
+            "Send photo one by one.",
+            "Type /help or /start to display this message.",
+        ]))
 
     async def handle_photo_message(self, message: types.Message) -> None:
         """
         Download image sent by user and reply it with processed images
         :param message: message object
         """
+        self._logger.info(f"Handle image message from {message.chat.id}:{message.chat.username}")
         # Retrieve image info
         image_file_id: str = message.photo[-1].file_id
         image_file: types.File = await self._bot.get_file(image_file_id)
@@ -79,7 +86,6 @@ class GanimeBot:
         logger.addHandler(stream_handler)
 
         return logger
-
 
 if __name__ == '__main__':
     # Load API key from config
