@@ -6,8 +6,5 @@ venv/
 backend/ugatit/checkpoints/*
 !backend/ugatit/checkpoints/place_your_checkpoints_here
 
-# Configuration file with API_KEY
-bot.conf
-
 # Python files
 *.pyc
