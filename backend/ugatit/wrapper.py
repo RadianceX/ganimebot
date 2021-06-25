@@ -1,11 +1,11 @@
 import os.path
+import numpy
+import cv2
+import tensorflow
 from argparse import Namespace
 from backend.ugatit.repo.UGATIT import UGATIT
 import backend.ugatit.repo.main as ugatit_main
 import backend.ugatit.repo.utils as ugatit_utils
-import numpy
-import cv2
-import tensorflow
 
 
 class UgatitWrapper:
@@ -22,9 +22,9 @@ class UgatitWrapper:
         self.__overwrite_args(args)
 
         # Setup TensorFlow
+        tensorflow.get_logger().setLevel('ERROR')
         tf_session: tensorflow.Session = tensorflow.Session(config=tensorflow.ConfigProto(allow_soft_placement=True))
         tensorflow.global_variables_initializer().run(session=tf_session)
-        tensorflow.get_logger().setLevel('ERROR')
 
         # Setup UGATIT
         self.base_gan: UGATIT = UGATIT(tf_session, args)
@@ -100,7 +100,7 @@ class UgatitWrapper:
         """
         args.light = True
         args.phase = 'test'
-        args.checkpoint_dir = os.path.abspath('./backend/ugatit/repo/checkpoint').replace('\\', '/')
+        args.checkpoint_dir = os.path.abspath('./backend/ugatit/checkpoints').replace('\\', '/')
         args.result_dir = os.path.abspath('./backend/ugatit/repo/results').replace('\\', '/')
         args.log_dir = os.path.abspath('./backend/ugatit/repo/logs').replace('\\', '/')
         args.sample_dir = os.path.abspath('./backend/ugatit/repo/samples').replace('\\', '/')
