@@ -1,0 +1,17 @@
+# IDE folders
+.idea
+
+# Virtual environment
+venv/
+
+# UGATIT original repo
+backend/ugatit/repo
+
+# Directories which are created by UGATIT. TODO: skip folder creation
+checkpoint/
+logs/
+samples/
+results/
+
+# Configuration file with API_KEY
+bot.conf
