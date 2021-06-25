@@ -4,11 +4,8 @@
 # Virtual environment
 venv/
 
-# Directories which are created by UGATIT. TODO: skip folder creation
-checkpoint/
-logs/
-samples/
-results/
-
 # Configuration file with API_KEY
 bot.conf
+
+# Python files
+*.pyc
