@@ -1,61 +1,63 @@
 import io
 from PIL import Image
-from backend.ugatit.main import UgatitEnhanced
+from backend.ugatit.wrapper import UgatitWrapper
 import numpy
 
 
-class GanimeBotApi:
+class GanApi:
     """
-    TODO: add description
+    Class contains API methods for bot
     """
     def __init__(self) -> None:
         """
-        TODO: add description
+        Constructor
         """
-        self.__handler_class: UgatitEnhanced = UgatitEnhanced()
+        self.__handler_class: UgatitWrapper = UgatitWrapper()
 
-    async def photo2anime(self, image: io.BytesIO) -> io.BytesIO:
+    async def selfie2anime(self, selfie: io.BytesIO) -> io.BytesIO:
         """
-        TODO: add description
-        :param image:
-        :return:
+        Transform selfie to anime image
+        :param selfie: image as io.BytesIO
+        :return: anime image as io.BytesIO
         """
-        numpy_image: numpy.ndarray = self.__bytesio2numpy(image)
-        processed_image: numpy.ndarray = self.__handler_class.photo2anime(input_image=numpy_image)
+        numpy_image: numpy.ndarray = self.__bytesio2numpy(selfie)
+        processed_image: numpy.ndarray = self.__handler_class.selfie2anime(input_image=numpy_image)
         image_bytes: io.BytesIO = self.__numpy2bytesio(processed_image)
         return image_bytes
 
-    async def anime2photo(self, image: io.BytesIO) -> io.BytesIO:
+    async def anime2selfie(self, anime_image: io.BytesIO) -> io.BytesIO:
         """
-        TODO: add description
-        :param image:
-        :return:
+        Transform anime to selfie
+        :param anime_image: anime image as io.BytesIO
+        :return: image as io.BytesIO
         """
-        numpy_image: numpy.ndarray = self.__bytesio2numpy(image)
-        processed_image: numpy.ndarray = self.__handler_class.anime2photo(input_image=numpy_image)
+        numpy_image: numpy.ndarray = self.__bytesio2numpy(anime_image)
+        processed_image: numpy.ndarray = self.__handler_class.anime2selfie(input_image=numpy_image)
         image_bytes: io.BytesIO = self.__numpy2bytesio(processed_image)
         return image_bytes
 
-    def __numpy2bytesio(self, out_pic: numpy.ndarray) -> io.BytesIO:
+    @staticmethod
+    def __numpy2bytesio(numpy_image: numpy.ndarray) -> io.BytesIO:
         """
-        TODO: add description
-        :param out_pic:
-        :return:
+        Convert numpy image to io.BytesIO image
+        :param numpy_image: image as numpy.ndarray
+        :return: image as io.BytesIO
         """
-        out_bytesio: io.BytesIO = io.BytesIO()
-        out_bytesio.name = 'image.jpeg'
-        pil_image: Image.Image = Image.fromarray(out_pic.astype('uint8'), 'RGB')
-        pil_image.save(out_bytesio, 'JPEG')
-        out_bytesio.seek(0)
-        return out_bytesio
+        out_picture: io.BytesIO = io.BytesIO()
+        out_picture.name = 'selfie.jpeg'
+        pil_image: Image.Image = Image.fromarray(numpy_image.astype('uint8'), 'RGB')
+        pil_image.save(out_picture, 'JPEG')
+        out_picture.seek(0)
+        return out_picture
 
-    def __bytesio2numpy(self, bytes: io.BytesIO) -> numpy.ndarray:
+    @staticmethod
+    def __bytesio2numpy(inp_bytes: io.BytesIO) -> numpy.ndarray:
         """
-        TODO: add description
-        :param bytes:
-        :return:
+        Convert io.BytesIO image to numpy image
+        :param inp_bytes: image as io.BytesIO
+        :return: image as numpy.ndarray
         """
-        bytes.seek(0)
-        pil_image: Image.Image = Image.open(bytes)
+        inp_bytes.seek(0)
+        pil_image: Image.Image = Image.open(inp_bytes)
         numpy_image = numpy.asarray(pil_image)
         return numpy_image
