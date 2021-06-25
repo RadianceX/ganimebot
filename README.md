@@ -16,6 +16,11 @@ Telegram bot that converts images using [UGATIT](https://github.com/taki0112/UGA
   - set your API_TOKEN in ./bot.conf file
 
 ## Start the bot
+### If you are using venv
+  - ./start.sh
+### Without venv
+  Execute following commands in bash
+  - export PYTHONPATH="$PWD/backend/ugatit/repo"
   - python ganimebot.py
 
 ## Checkpoints for UGATIT model
