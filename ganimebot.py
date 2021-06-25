@@ -87,6 +87,7 @@ class GanimeBot:
 
         return logger
 
+
 if __name__ == '__main__':
     # Load API key from config
     parser: configparser.ConfigParser = configparser.ConfigParser()

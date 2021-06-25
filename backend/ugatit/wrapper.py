@@ -2,7 +2,8 @@ import os.path
 import cv2
 import numpy
 import tensorflow
-from argparse import Namespacefrom backend.ugatit.repo.UGATIT import UGATIT
+from argparse import Namespace
+from backend.ugatit.repo.UGATIT import UGATIT
 import backend.ugatit.repo.main as ugatit_main
 import backend.ugatit.repo.utils as ugatit_utils
 
