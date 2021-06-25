@@ -4,9 +4,6 @@
 # Virtual environment
 venv/
 
-# UGATIT original repo
-backend/ugatit/repo
-
 # Directories which are created by UGATIT. TODO: skip folder creation
 checkpoint/
 logs/
